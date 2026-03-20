@@ -21,6 +21,7 @@ apellido = (apellido.upper())
 edad_futura = edad + 35
 IMC = peso / (altura**2)
 
+print("")
 print(f"Apellido y Nombre: {apellido} {nombre}")
 print(f"DNI: {DNI}")
 print(f"Edad: {edad}")
