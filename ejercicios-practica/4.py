@@ -1,4 +1,6 @@
-import math # <--- ¡Esto es fundamental!
+# Hallar la longitud de la hipotenusa de un triángulo dada la medida de sus catetos
+
+import math
 
 cateto1 = float(input("Ingrese la medida del primer cateto: "))
 cateto2 = float(input("Ingrese la medida del segundo cateto: "))
