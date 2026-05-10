@@ -1,0 +1,7 @@
+{
+  "terminal": {
+    "working_directory": "current_file_directory"
+  },
+  "hard_tabs": false,
+  "tab_size": 4
+}
