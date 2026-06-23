@@ -1,6 +1,11 @@
 {
     "workbench.activityBar.location": "top",
-    "editor.fontSize": 13,
+    "editor.fontSize": 16,
     "editor.cursorSmoothCaretAnimation": "on",
-    "editor.cursorBlinking": "phase"
+    "editor.cursorBlinking": "phase",
+    "terminal.integrated.fontLigatures.enabled": true,
+    "editor.fontFamily": "'Cascadia Code PL', monospace",
+    "editor.fontLigatures": true,
+    "editor.guides.bracketPairs": true,
+    "python.languageServer": "Jedi"
 }
