@@ -1,26 +1,22 @@
 def ingresar_continente():
     continente = input("Ingrese continente: (America, Asia, Oceania, Europa, Africa, FIN): ")
     while continente != "America" and continente != "Asia" and continente != "Oceania" and continente != "Europa" and continente != "Africa" and continente != "FIN":
-        continente = input("Ingrese continente: (America, Asia, Oceania, Europa, Africa, FIN): ")
+        continente = input("ERROR! Ingrese continente: (America, Asia, Oceania, Europa, Africa, FIN): ")
     return continente
- 
  
 def ingresar_nombre_montaña():
     montaña = input("Ingrese nombre Montaña: ")
     while montaña == "":
-        montaña = input("Ingrese nombre Montaña: ")
+        montaña = input("ERROR! Ingrese nombre Montaña: ")
     return montaña
- 
  
 def ingresar_altura_montaña():
     altura_montaña = float(input("Ingrese altura montaña: "))
     while altura_montaña < 0 :
-        altura_montaña = float(input("Ingrese altura montaña: "))
+        altura_montaña = float(input("ERROR! Ingrese altura montaña: "))
     return altura_montaña
 
-
-
-def eliminar_moñtanas_chicas(arr_continente,arr_nombre_montaña,arr_alturas_montañas,arr_altura_escalada):
+def eliminar_montanas_chicas(arr_continente,arr_nombre_montaña,arr_alturas_montañas,arr_altura_escalada):
     i = 0
     while i < len(arr_continente):
         if arr_altura_escalada[i] < 100:
@@ -28,19 +24,18 @@ def eliminar_moñtanas_chicas(arr_continente,arr_nombre_montaña,arr_alturas_mon
             arr_continente.pop(i)
             arr_nombre_montaña.pop(i)
             arr_alturas_montañas.pop(i)
-            arr_altura_escalada.pop(i)
+            arr_altura_escalada.pop(i)                                                                                                                                                                                                                  
             print("Se saco la Montaña")
         else:
             i += 1
 
-
 def ingresar_altura_escalada(altura_montaña):
     altura_escalada = float(input("Ingrese altura escalada: "))
     while altura_escalada < 0 or altura_escalada > altura_montaña:
-        altura_escalada = float(input("Ingrese altura escalada: "))
+        altura_escalada = float(input("ERROR! Ingrese altura escalada: "))
     return altura_escalada
 
-def buscar_nombre_repetido(arr_nombre_montaña,montaña_a_buscar):
+def buscar_nombre_repetido(arr_nombre_montaña,montaña_a_buscar):                                                                                                                                                                         
     i = 0
     while i < len(arr_nombre_montaña) and arr_nombre_montaña[i] != montaña_a_buscar:
         i += 1
@@ -60,11 +55,15 @@ def calcular_montaña_mas_alta_asia(arr_continente,arr_nombre_montaña,arr_altur
 def calcular_promedio_america(arr_continente,arr_altura_escalada):
     acum = 0
     cont = 0
+    promedio = 0
     for i in range (len(arr_altura_escalada)):
         if arr_continente[i] == "America":
             acum += arr_altura_escalada[i]
             cont += 1
-    promedio = acum / cont
+    if cont > 0:
+        promedio = acum / cont
+    else:
+        print("No hay montañas en America")
     return promedio
  
 def buscar_elemento_asia(arr_continente):
@@ -76,21 +75,23 @@ def buscar_elemento_asia(arr_continente):
  
 def calcular_montañas_escaladas(arr_nombre_montaña,arr_alturas_montañas,arr_alturas_escaladas):
     cont = 0
-    for i in range (len(alturas_escaladas)):
+    porcentaje = 0
+    for i in range (len(arr_alturas_escaladas)):
         if arr_alturas_montañas[i] - arr_alturas_escaladas[i] == 0:
             cont += 1
             print(f"La montaña {arr_nombre_montaña[i]} SI escalo hasta la cima")
         else:
             print(f"La montaña {arr_nombre_montaña[i]} NO escalo hasta la cima")
     
-    porcentaje = (cont / len(arr_alturas_escaladas)) * 100
+        porcentaje = (cont / len(arr_alturas_escaladas)) * 100
+    else:
+        print("No hay montañas registradas para calcular el porcentaje.")
     return porcentaje 
     
 def intercambiar (arr,i,j):
     aux = arr[i]
     arr[i] = arr[j]
     arr[j] = aux
- 
  
 def ordenar(arr_continentes,arr_nombres_montaña,arr_alturas_montañas,arr_alturas_escaladas):
     for i in range (len(arr_nombres_montaña)):
@@ -101,15 +102,14 @@ def ordenar(arr_continentes,arr_nombres_montaña,arr_alturas_montañas,arr_altur
                 intercambiar(arr_alturas_montañas,i,j)
                 intercambiar(arr_alturas_escaladas,i,j) 
  
+def mostrar(arr_continentes,arr_nombres_montaña,arr_alturas_montañas,arr_alturas_escaladas,filtrar_continente):
+    for i in range (len(arr_nombres_montaña)):
+        if arr_continentes[i] == filtrar_continente:
+            print(f"Continente: {arr_continentes[i]}")
+            print(f"Nombre Montaña: {arr_nombres_montaña[i]}")
+            print(f"Altura Montaña: {arr_alturas_montañas[i]}")
+            print(f"Altura Escalada: {arr_alturas_escaladas[i]}")
  
-def mostrar(arr_continentes,arr_nombres_montaña,arr_alturas_montañas,arr_alturas_escaladas):
-    for i in range (len(arr_continentes)):
-        print(f"Continente: {arr_continentes[i]}")
-        print(f"Nombre Montaña: {arr_nombres_montaña[i]}")
-        print(f"Altura Montaña: {arr_alturas_montañas[i]}")
-        print(f"Altura Escalada: {arr_alturas_escaladas[i]}")
- 
-
 def cargar (arr_continentes,arr_nombres_montaña,arr_alturas_montañas,arr_alturas_escaladas):
     
     continente = ingresar_continente()
@@ -120,7 +120,7 @@ def cargar (arr_continentes,arr_nombres_montaña,arr_alturas_montañas,arr_altur
         indice = buscar_nombre_repetido(arr_nombres_montaña,nombre_montaña)
         
         if indice < len(arr_nombres_montaña):
-            altura_escalada = ingresar_altura_escalada(arr_alturas_escaladas[indice])
+            altura_escalada = ingresar_altura_escalada(arr_alturas_montañas[indice])
             arr_alturas_escaladas[indice] = altura_escalada
         
         else:
@@ -134,7 +134,6 @@ def cargar (arr_continentes,arr_nombres_montaña,arr_alturas_montañas,arr_altur
 
         continente = ingresar_continente()
  
- 
 continentes = []
 nombres_montañas = []
 alturas_montañas = []
@@ -142,16 +141,15 @@ alturas_escaladas = []
  
 cargar(continentes,nombres_montañas,alturas_montañas,alturas_escaladas)
  
- 
 if len (continentes) > 0:
     
     print("---- Punto 1 ----")
 
     indice_asia = buscar_elemento_asia(continentes)
     if indice_asia < len(continentes):
-        indice_amyor = calcular_montaña_mas_alta_asia(continentes,nombres_montañas,alturas_montañas,alturas_escaladas)
-        print(f"Montaña: {nombres_montañas[indice_amyor]}")
-        print(f"Altura Escalada: {alturas_escaladas[indice_amyor]}")
+        indice_mayor = calcular_montaña_mas_alta_asia(continentes,nombres_montañas,alturas_montañas,alturas_escaladas)
+        print(f"Montaña más alta de Asia: {nombres_montañas[indice_mayor]}")
+        print(f"Altura de la montaña: {alturas_montañas[indice_mayor]} metros")
     else:
         print("NO hay montañas en Asia")
     
@@ -164,11 +162,16 @@ if len (continentes) > 0:
     print(f"Porcentaje de montañas Escaladas hasta la cima: {porcentaje}%")
     
     print("---- Punto 4 ----")
-    eliminar_moñtanas_chicas(continentes,nombres_montañas,alturas_montañas,alturas_escaladas)
+    eliminar_montanas_chicas(continentes,nombres_montañas,alturas_montañas,alturas_escaladas)
 
     print("---- Punto 5 ----")
     ordenar(continentes,nombres_montañas,alturas_montañas,alturas_escaladas)
-    mostrar(continentes,nombres_montañas,alturas_montañas,alturas_escaladas)
-    
+
+    mostrar(continentes,nombres_montañas,alturas_montañas,alturas_escaladas,"Asia")
+    mostrar(continentes,nombres_montañas,alturas_montañas,alturas_escaladas,"America")
+    mostrar(continentes,nombres_montañas,alturas_montañas,alturas_escaladas,"Oceania")
+    mostrar(continentes,nombres_montañas,alturas_montañas,alturas_escaladas,"Europa")
+    mostrar(continentes,nombres_montañas,alturas_montañas,alturas_escaladas,"Africa")
+
 else:
     print("No hay datos cargados")
